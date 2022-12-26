@@ -93,7 +93,7 @@ vector<string> split(const string &s, char c)
 }
 
 int mostpressure = 0;
-int mostpressure2 = 0;
+vector<int> mostpressure2;
 
 void solve(int cur_node, int transit, vector<int> remaining, int pressure_releasing, int pressure_released, int time)
 {
@@ -142,13 +142,13 @@ void solve2(int cur_node1, int cur_node2, int transit1, int transit2, const vect
     transit2--;
     pressure_released += pressure_releasing;
 
+    if (pressure_released >= mostpressure2[time])
+    {
+        mostpressure2[time] = pressure_released;
+    }
+
     if (time == 0)
     {
-        if (pressure_released > mostpressure2)
-        {
-            mostpressure2 = pressure_released;
-            // cout << mostpressure2 << endl;
-        }
         return;
     }
 
@@ -321,6 +321,12 @@ int main()
             remaining.push_back(i);
     }
 
+    for (int i = 0; i < 26; i++)
+    {
+        mostpressure2.push_back(0);
+    }
+    
+
     solve2(r_AA, r_AA, 0, 0, remaining, 0, 0, 26);
-    cout << "Part 2: " << mostpressure2 << endl;
+    cout << "Part 2: " << mostpressure2[0] << endl;
 }
