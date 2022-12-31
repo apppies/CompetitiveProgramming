@@ -74,7 +74,6 @@ int main()
 
         for (auto &elf : elves)
         {
-
             pair<int, int> ne = {elf.first + 1, elf.second - 1};
             pair<int, int> n = {elf.first, elf.second - 1};
             pair<int, int> nw = {elf.first - 1, elf.second - 1};
@@ -86,15 +85,24 @@ int main()
 
             pair<int, int> newelf = elf;
 
-            if (cur_map.count(ne) || cur_map.count(n) || cur_map.count(nw) || cur_map.count(w) ||
-                cur_map.count(sw) || cur_map.count(s) || cur_map.count(se) || cur_map.count(e))
+            int has_ne =cur_map.count(ne);
+            int has_n = cur_map.count(n);
+            int has_nw =cur_map.count(nw);
+            int has_w = cur_map.count(w);
+            int has_sw =cur_map.count(sw);
+            int has_s = cur_map.count(s);
+            int has_se =cur_map.count(se);
+            int has_e = cur_map.count(e);
+
+            if (has_ne || has_n || has_nw || has_w ||
+                has_sw || has_s || has_se || has_e)
             {
                 for (int i = 0; i < 4; i++)
                 {
                     int to_check = (round + i) % 4;
                     if (to_check == 0)
                     {
-                        if (!(cur_map.count(ne) || cur_map.count(n) || cur_map.count(nw)))
+                        if (!(has_ne || has_n || has_nw))
                         {
                             newelf = n;
                             break;
@@ -102,21 +110,21 @@ int main()
                     }
                     else if (to_check == 1)
                     {
-                        if (!(cur_map.count(sw) || cur_map.count(s) || cur_map.count(se)))
+                        if (!(has_sw || has_s || has_se))
                         {
                             newelf = s;break;
                         }
                     }
                     else if (to_check == 2)
                     {
-                        if (!(cur_map.count(sw) || cur_map.count(w) || cur_map.count(nw)))
+                        if (!(has_sw || has_w || has_nw))
                         {
                             newelf = w;break;
                         }
                     }
                     else if (to_check == 3)
                     {
-                        if (!(cur_map.count(se) || cur_map.count(e) || cur_map.count(ne)))
+                        if (!(has_se || has_e || has_ne))
                         {
                             newelf = e;break;
                         }
