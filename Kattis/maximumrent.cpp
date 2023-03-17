@@ -1,3 +1,4 @@
+// https://open.kattis.com/problems/maximumrent
 #include <string>
 #include <iostream>
 
